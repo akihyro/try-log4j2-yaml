@@ -1,0 +1,28 @@
+Configuration:
+  status: "warn"
+  Appenders:
+    Console:
+      name: "console"
+      PatternLayout:
+        pattern: "%d{yyyy/MM/dd HH:mm:ss.SSS} %-5level - %m%n"
+    RollingFile:
+      name: "file"
+      fileName: "${basedir}/logs/${project.build.finalName}.log"
+      filePattern: "${basedir}/logs/%d{yyyy-MM-dd}_${project.build.finalName}.log.gz"
+      PatternLayout:
+        pattern: "%d{yyyy/MM/dd HH:mm:ss.SSS} %-5level - %m%n"
+      Policies:
+        TimeBasedTriggeringPolicy: {}
+  Loggers:
+    Logger:
+      - name: "trylog4j2yaml"
+        level: "debug"
+        additivity: "false"
+        AppenderRef:
+          - ref: "console"
+          - ref: "file"
+    Root:
+      level: "warn"
+      AppenderRef:
+        - ref: "console"
+        - ref: "file"
